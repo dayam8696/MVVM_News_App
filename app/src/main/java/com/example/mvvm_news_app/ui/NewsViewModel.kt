@@ -19,9 +19,7 @@ val breakingNews:MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     init {
         getBreakingNews("in")
     }
-    init {
 
-    }
 
     fun getBreakingNews(countryCode :String) = viewModelScope.launch {
          breakingNews.postValue(Resource.Loading())

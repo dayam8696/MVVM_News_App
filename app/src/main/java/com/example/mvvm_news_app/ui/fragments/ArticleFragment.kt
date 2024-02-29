@@ -4,13 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
+import androidx.navigation.fragment.navArgs
 import com.example.mvvm_news_app.databinding.FragmentArticleBinding
+import com.example.mvvm_news_app.models.Article
 import com.example.mvvm_news_app.ui.NewsActivity
 import com.example.mvvm_news_app.ui.NewsViewModel
 
 class ArticleFragment:BaseFragment() {
+    companion object{
+        lateinit var article: Article
+    }
     private val binding by lazy { FragmentArticleBinding.inflate(layoutInflater) }
     lateinit var viewModel: NewsViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,5 +29,10 @@ class ArticleFragment:BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewmodel
+
+        binding.webView.apply {
+            webViewClient = WebViewClient()
+            loadUrl(article.url)
+        }
     }
 }

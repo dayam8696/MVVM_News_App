@@ -1,7 +1,7 @@
 package com.example.mvvm_news_app.api
 
 import com.example.mvvm_news_app.models.NewsResponse
-import com.example.mvvm_news_app.util.Constants.Companion.API_KEY
+import com.example.mvvm_news_app.util.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -21,7 +21,7 @@ interface NewsApi {
 
     @GET("v2/everything")
     suspend fun searchForNews(
-        @Query("country")
+        @Query("q")
         searchQuery:String ,
         @Query("pages")
         pageNumber:Int = 1,

@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.mvvm_news_app.R
 import com.example.mvvm_news_app.adapters.NewsAdapter
 import com.example.mvvm_news_app.databinding.FragmentBreakingNewsBinding
 import com.example.mvvm_news_app.ui.NewsActivity
@@ -33,6 +35,11 @@ class BreakingNewsFragment:BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewmodel
         setupRecycleView()
+
+        newsAdapter.onItemClickListener = {
+          ArticleFragment.article =it
+           navigateTo(R.id.action_breakingNewsFragment_to_articleFragment)
+        }
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {
             response ->
             when(response){

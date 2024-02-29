@@ -12,9 +12,11 @@ import com.example.mvvm_news_app.R
 import com.example.mvvm_news_app.models.Article
 import com.example.mvvm_news_app.databinding.ItemArticlePreviewBinding
 
-class NewsAdapter :RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
-  inner class ArticleViewHolder(val binding: ItemArticlePreviewBinding):
-  RecyclerView.ViewHolder(binding.root)
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
+    inner class ArticleViewHolder(val binding: ItemArticlePreviewBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    lateinit var onItemClickListener: ((Article) -> Unit)
 
     private val differCallback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -39,26 +41,25 @@ class NewsAdapter :RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-      return differ.currentList.size
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
-        Glide.with(holder.itemView.context).load(article.urlToImage).into(holder.binding.ivArticleImage)
-        holder.binding.tvSource.text =article.source.name
+        Glide.with(holder.itemView.context).load(article.urlToImage)
+            .into(holder.binding.ivArticleImage)
+        holder.binding.tvSource.text = article.source.name
         holder.binding.tvTitle.text = article.title
         holder.binding.tvDescription.text = article.description
         holder.binding.tvPublishedAt.text = article.publishedAt
-        setOnItemClickListener {
-            onItemClickListener?.let { it(article) }
+        holder.itemView.setOnClickListener {
+            onItemClickListener.invoke(article)
         }
-
-    }
-
-    private var onItemClickListener: ((Article) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Article) -> Unit) {
-        onItemClickListener = listener
     }
 
 }
+
+
+
+
+

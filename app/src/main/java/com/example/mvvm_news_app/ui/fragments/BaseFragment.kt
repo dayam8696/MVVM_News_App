@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm_news_app.databinding.BaseFragmentBinding
@@ -29,7 +30,7 @@ open class BaseFragment:Fragment() {
 
     }
 
-    fun navigateTo(id: Int) {
+    fun navigateTo(id: Int ) {
         findNavController().navigate(id)
     }
 

@@ -1,11 +1,10 @@
 package com.example.mvvm_news_app.api
 
-import com.example.mvvm_news_app.util.Constants.Companion.BASE_URL
+import com.example.mvvm_news_app.util.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class RetrofitInstance {
     companion object{
